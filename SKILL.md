@@ -175,9 +175,15 @@ Then write the three files:
   deliberately left alone, and every failure you already found, so the founder is adding
   to a list instead of starting one.
 
-**The caption step, outside Descript.** Descript decides its own caption breaks and
-exposes no control over segment length, so a paragraph can land as a three-line block. The
-prompt therefore asks it only for styling.
+**The caption step.** The look is locked: Inter Regular at 30, white on a black box at 70
+percent, bottom centre (Chris, 2026-09-11). Regular, never bold.
+
+The burned-in captions are Descript's, and the failure reported every time is a wall of
+piled-up lines. The prompt asks for the break in the same call: one line on screen,
+meaning-unit splits, about 45 characters at most. Read the result, and where blocks are
+still clumped, split them by hand in the app. That is typing, not credits.
+
+The SRT is a separate file and still gets resegmented here, because YouTube takes its own:
 
 ```bash
 # export_transcript with format "srt", save it, then:

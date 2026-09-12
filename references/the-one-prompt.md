@@ -69,10 +69,15 @@ THE RULES, in priority order.
 THEN, TEXT ONLY, no audio change and no change to the duration, correct these mishearings:
 [one line per mishearing, as: what the transcript says -> what it should say]
 
-THEN turn captions on with this styling and nothing else: [font] at [size], white text on black
-at 70 percent opacity, bold, bottom centre, no outline, no shadow, no rounded corners, no
-animation, no word highlighting. Do not try to control where the captions break. That is handled
-outside this call and I do not want you spending the attempt.
+THEN turn captions on with this styling and nothing else: Inter Regular at size 30, white text on
+black at 70 percent opacity, bottom centre, no outline, no shadow, no rounded corners, no
+animation, no word highlighting. Regular weight, never bold.
+
+AND BREAK THEM SHORT. One line on screen at a time. Split every caption block at its meaning unit,
+about 45 characters at most, and never leave a wall of piled-up lines standing. Where a sentence is
+longer than one line, split it and let the halves run in sequence. This is not cosmetic; a wall of
+text is the caption failure that gets reported every single time. If you cannot set the break
+points, say that plainly in the report instead of leaving the walls in place.
 
 REPORT BACK: the new duration, how many removals you made, every place you were unsure whether
 something was a retake or real content, and anything above you could not do. Do not report a
