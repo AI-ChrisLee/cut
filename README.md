@@ -1,49 +1,43 @@
 # Cut: install in 60 seconds
 
-The edit half of an Execution Squad's content lane. You record one take and fumble as
-much as you like. This keeps the last good attempt of every line, drops the rest, fixes
-the names the transcriber mangled, and hands you a page to read instead of a timeline to
-scrub.
+This skill is a base. Once you have done it your way, tell your squad "update the skill to
+do it like this."
+
+Record one take and fumble as much as you like. Descript's three buttons drop the retakes,
+the filler and the gaps. This reads what came out, tells you what is still wrong and exactly
+where, and hands you a page to read instead of a timeline to scrub.
 
 ## What it runs on
 
 Printed here so you find out now and not at midnight:
 
-- A paid Descript account with the AI editor.
-- The Descript connector authorized once in a live session. It cannot be done in the
-  background.
-- `ffmpeg` on your laptop.
+- A Descript account, and a take you already ran through the three buttons: Remove filler
+  words, then Remove retakes, then Shorten word gaps.
+- That cut exported out of Descript as an SRT. It carries the timestamps.
+- This week's script, next to it.
+- `python3`. Both scripts in here are standard library, so there is nothing to install.
 
-Credits and transcription minutes are two separate meters over there. Know where your
-balance is.
-
-**No Descript?** Record in one take, cut nothing, and publish that. The week's output is
-the video live, not the edit. There is also a free local path in `scripts/cut.py`, but it
-needs `faster-whisper` installed and its transcript is weaker, so it is for people who are
-comfortable installing python packages.
+Descript is the cut. Its free plan stamps a watermark on your export, so this runs on a paid
+plan.
 
 ## Run it
 
 Drop this whole folder into `.claude/skills/` as `cut`, quit and reopen Claude Code, then
-say: **"Cut this recording."** Give it the original file, never a re-export.
-
-Your Claude Code session stays open and the lid stays up while it runs. The editing
-happens on Descript's servers; the waiting happens on your laptop.
+say what is wrong in plain words, one thing at a time: **"Fix my opening."**
 
 ## What you get
 
-Three files in your episode folder, and a link to download the finished video:
+3 files in your episode folder:
 
 - `06_TRANSCRIPT.md`, the cut as a page you can read on your phone.
-- `06_REVIEW.md`, every gate passed or failed, the finished length, and what it
-  deliberately left alone.
-- `06_CAPTIONS.srt`, one sentence per cue, ready to upload as the real subtitle track so
-  YouTube indexes your spelling instead of its own guess.
+- `06_REVIEW.md`, every gate passed or failed, the finished length, and the lines to delete
+  with their timestamps and the words quoted.
+- `06_CAPTIONS.srt`, one sentence per cue, ready to upload as the real subtitle track.
 
-Read the two pages, listen to the first 15 seconds, then say **"Approved"**, or say
-everything wrong in one message. The fix is one call, so one message.
+Read the 2 pages, listen to the first 15 seconds, then delete the named lines in Descript
+and export the video. That file is the one you upload.
 
 ## What it will not do
 
-Send a third paid call to the editor. Re-time your audio. Edit your script. Publish
-anything.
+Touch your Descript project. Re-time your audio. Edit your script. Upload, schedule or
+publish anything.
