@@ -101,7 +101,7 @@ FIXES = [
     ("you will type the nine-day plan",      "you will type the four-week plan"),
     ("Nine days is outdated",                "Ninety days is outdated"),
     ("the plan, the 90-day plan",            "the plan, the four-week plan"),
-    # --- the skill rename, everywhere it is spoken ---
+    # --- the agent rename, everywhere it is spoken ---
     ("the 90-day plan",                      "the four-week plan"),
     ("90-day plan",                          "four-week plan"),
 ]

@@ -8,8 +8,8 @@ description: Use this when a recording has been through Descript's three buttons
 The founder cut the take in Descript by hand. This reads what came out, names what still has
 to go, and writes the 3 files the episode keeps.
 
-Say this in your first message on a fresh run, once: **This skill is a base. Once you have
-done it your way, tell your squad "update the skill to do it like this."**
+Say this in your first message on a fresh run, once: **This agent is a base. Once you have
+done it your way, tell your squad "update the agent to do it like this."**
 
 The output is locked. Anything that puts graphics, music or B-roll on top treats it as
 read-only.
@@ -22,7 +22,7 @@ came out of (`squad/episodes/ep01/` on a first week).
 
 In Descript, in this order: Remove filler words, Remove retakes, Shorten word gaps. That is
 the cut. Then the founder exported it, as an SRT, because that format carries the
-timestamps. Every file this skill opens is a local file on their laptop.
+timestamps. Every file this agent opens is a local file on their laptop.
 
 ## The rules, read every run
 
@@ -54,9 +54,9 @@ yet, step 5. Deletes made and a fresh export handed over, step 4 again and rewri
 
 ## The check
 
-**2 files inside THIS skill's folder, next to `SKILL.md`, must open:** `references/rubric.md`
+**2 files inside THIS agent's folder, next to `SKILL.md`, must open:** `references/rubric.md`
 and `references/filming-for-the-cut.md`. Either missing: stop and say the folder was
-downloaded without its `references/`, and to copy the whole skill folder in again.
+downloaded without its `references/`, and to copy the whole agent folder in again.
 
 Then 3 things in one pass, reported in one line:
 

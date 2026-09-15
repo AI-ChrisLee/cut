@@ -4,13 +4,13 @@ Copyright (c) 2026 Nova9 Inc. (AI Chris Lee). All rights reserved.
 
 ## What you CAN do, free, forever
 
-- Run this skill on your own business, including commercially.
+- Run this agent on your own business, including commercially.
 - Modify it for your own use.
 - Share a LINK to this repository with anyone.
 
 ## What you CANNOT do
 
-- Sell, resell, or license this skill or any modified version of it.
+- Sell, resell, or license this agent or any modified version of it.
 - Repackage it, in whole or in part, into a paid product: a course, a template
   pack, a "prompt library," a paid community resource, a bundle, anything with a
   price on it.

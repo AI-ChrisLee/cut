@@ -1,6 +1,6 @@
 # Cut: install in 60 seconds
 
-This skill is a base. Once you have done it your way, tell your squad "update the skill to
+This agent is a base. Once you have done it your way, tell your squad "update the agent to
 do it like this."
 
 Record one take and fumble as much as you like. Descript's three buttons drop the retakes,
