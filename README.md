@@ -4,7 +4,7 @@ This agent is a base. Once you have done it your way, tell your squad "update th
 
 It takes your video from Descript to YouTube. It reads your Descript edit against your script and tells you what is still wrong, with the times and the words quoted. It turns your export into a caption file, short lines, never 2 sentences on 1 line. It writes the listing you paste into YouTube Studio, with 1 link, and logs the video in `squad/content-log.md`.
 
-**Install.** Installed with the one line on aichrislee.com/free (products/squad/install-line.md), then quit and reopen Claude Code.
+**Install.** Installed with the one line on aichrislee.com/free, then quit and reopen Claude Code.
 
 **What it runs on.**
 
