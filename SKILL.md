@@ -1,155 +1,143 @@
 ---
 name: cut
-description: Use this when a recording has been through Descript's three buttons and something in it is still wrong. The founder says "Fix my opening", "Fix my ____", "cut this recording", "/cut", or hands over an SRT exported out of Descript with a script next to it. It reads the cut, names the timestamps to delete, and stops for the founder's read.
+description: Use this when a recording has been edited in Descript and needs its review, its captions and its YouTube listing. The founder says "Cut my raw take.", "Fix my ____" (like "Fix my opening."), "Here's the new export.", "Set this video up on YouTube.", "Here's the link." or "/cut". It reads the SRT exported out of Descript against the script, names what to delete with the times and the words quoted, writes the caption file, writes the listing the founder pastes into YouTube Studio, and logs 1 row in squad/content-log.md. It never opens Descript, never deletes a word and never touches YouTube.
 ---
 
 # Cut
 
-The founder cut the take in Descript by hand. This reads what came out, names what still has
-to go, and writes the 3 files the episode keeps.
+4 outputs, in this order: `<episode>/06_REVIEW.md` (the gates and the delete list), `<episode>/06_CAPTIONS.srt`, `squad/week/<date>-listing.md`, and 1 row in `squad/content-log.md`.
 
-Say this in your first message on a fresh run, once: **This agent is a base. Once you have
-done it your way, tell your squad "update the agent to do it like this."**
+**The first message of a fresh run** (no `06_REVIEW.md` in the episode folder) carries this line, word for word:
 
-The output is locked. Anything that puts graphics, music or B-roll on top treats it as
-read-only.
+> This agent is a base. Once you have done it your way, tell your squad "update the agent to do it like this."
 
-`.claude/squad-roots.md` is the per-repo instance file, and its values win over the
-`squad/` paths below, which are worked examples. The episode folder is the one the script
-came out of (`squad/episodes/ep01/` on a first week).
+Open `references/rubric.md` and `references/filming-for-the-cut.md`, and check that `scripts/gates.py` and `scripts/resegment.py` are there. Missing: say the agent folder came without its `references/` or `scripts/`, and stop. No `python3`: say so in 1 line, and stop. Both scripts use only what comes with Python.
 
-## What happened before this runs
+## Never
 
-In Descript, in this order: Remove filler words, Remove retakes, Shorten word gaps. That is
-the cut. Then the founder exported it, as an SRT, because that format carries the
-timestamps. Every file this agent opens is a local file on their laptop.
+- Never open Descript, never delete a word, never re-time or re-encode a file. The founder deletes, in Descript's text.
+- Never upload, schedule, publish or post. Never touch YouTube.
+- Never edit the script. Never write a title. Never invent a line, a time or a number.
+- Every finding carries its time off the SRT and the words quoted.
+- 1 link in the listing, never 2.
 
-## The rules, read every run
+## Before it runs, by hand
 
-- **Never send, never publish, never upload, never schedule.** This run writes 3 files.
-- **Never delete anything yourself.** Deleting a line is typing in Descript, and the
-  founder's hand does it. Name the timestamp and quote the words so they can find it.
-- **Never invent a line.** A line absent from the exported transcript stays absent.
-- **Never re-time audio, never re-encode the original.**
-- **Never edit the script.** It is the instruction, not the output.
-- **Every finding carries a timestamp** off the SRT. A finding with no timestamp is a
-  feeling, and the founder cannot act on it at 11pm.
+The founder records 1 take (`references/filming-for-the-cut.md`), then in Descript:
 
-## The outputs, 3 files every run
+1. Drag the raw take in.
+2. Open the AI Tools panel. Remove filler words. Remove retakes. Shorten word gaps.
+3. Export, Subtitles, SRT, saved into the episode folder.
 
-1. `<episode>/06_TRANSCRIPT.md`: the cut as a page, the SRT's words with the cue numbers
-   and timecodes stripped. This is the review, and it is the only copy of the cut in the repo.
-2. `<episode>/06_CAPTIONS.srt`: one sentence per cue, ready to go up as the real subtitle
-   track. `/publish` names this file and YouTube takes it as it is.
-3. `<episode>/06_REVIEW.md`: every gate passed or failed, the finished length, what was
-   deliberately left alone, and the delete list, which is the timestamp, the words quoted,
-   and one line saying what goes.
+No SRT in the episode folder: print these 3 steps, and stop.
 
-Nothing else gets written. Never the script, never the package, never a second cut of the
-same take.
+## The episode
 
-**Resuming.** Read the outputs on disk, never a session's memory. No export on disk, say what
-to export and stop. An export and no `06_REVIEW.md`, start at step 1. The 3 files and no read
-yet, step 5. Deletes made and a fresh export handed over, step 4 again and rewrite the files.
+- The episode folder is the `episode:` line of the newest `squad/week/<date>-package.md`, unless the founder names another. No package: say "Run the Winning Scrape first. The title comes from your package." and stop.
+- The script is `03_SCRIPT.md` in that folder. Missing: say "Run /the-money-driven-script first. The edit is read against your script." and stop.
+- The export is the newest `.srt` in that folder that is not `06_CAPTIONS.srt`.
 
-## The check
+## The triggers
 
-**2 files inside THIS agent's folder, next to `SKILL.md`, must open:** `references/rubric.md`
-and `references/filming-for-the-cut.md`. Either missing: stop and say the folder was
-downloaded without its `references/`, and to copy the whole agent folder in again.
+| The founder says | This run |
+|---|---|
+| "Cut my raw take.", `/cut` | 1. The read |
+| "Fix my ____" | 2. The fix |
+| "Here's the new export." | 3. The captions |
+| "Set this video up on YouTube." | 4. The listing |
+| "Here's the link." | 5. The row |
 
-Then 3 things in one pass, reported in one line:
+Resuming reads the files, never a session's memory. No SRT: the 3 Descript steps. An SRT and no `06_REVIEW.md`: step 1. A review and no `06_CAPTIONS.srt`: wait for "Fix my ____" or "Here's the new export." Captions and no listing: step 4. A listing and no row with its title in `squad/content-log.md`: wait for "Here's the link." The row there: done.
 
-- **The export, on disk.** Ask for the SRT export, because it carries the timestamps the
-  delete list is made of. It belongs in the episode folder, next to the script. Missing: say
-  it comes out of Descript's export menu, format SRT, and stop.
-- **The script for this episode**, `<episode>/03_SCRIPT.md` or wherever the roots file puts
-  it. Without it the gates have nothing to compare the cut against.
-- **`python3`.** Both scripts here are standard library, so there is nothing to install.
+## 1. The read
 
-**Anything missing, stop and name the one thing to go get, in one line.** Nothing else in
-this run happens until it is on disk.
+1. Read the export top to bottom.
+2. Build the brand pairs. gates.py finds a word heard wrong inside a line it can match. A brand word heard as noise (Apify as F5) shows under G6 as said with different words. Search the export for every brand word, product, person and tool the script names, and pair each one missing. Write the pairs to a scratch `terms.tsv`, 1 line each, `Claude Code<TAB>the cloud called,cloud code`.
+3. Run `python3 .claude/skills/cut/scripts/gates.py <episode>/03_SCRIPT.md <export> terms.tsv` and read its whole output. Score G7 and G8 by `references/rubric.md`. Score every gate, never stop at the first failure. Delete `terms.tsv`.
+4. Write `06_REVIEW.md`: every gate passed or failed, the finished length, `## Word fixes` (what it says, what it should say) and `## Delete list` (empty until step 2).
+5. Print 3 short lists, in this order, and nothing more:
+   - Script lines it cannot find in the edit (G1). A line the founder said and cannot find there was eaten by a button. This list comes first, always.
+   - Words spelled wrong (G6): every should-say line gates.py prints, every line under its "Said with different words", plus the brand pairs: what it says, what it should say. Fixed by typing in Descript's text.
+   - What still looks wrong (G2, G3, G4, G5): the start time and the words quoted.
 
-## Step 1: Read the cut
+   Then: "Listen to the first 15 seconds. Then tell me what's wrong: Fix my ____."
 
-Write the SRT's spoken lines to `<episode>/06_TRANSCRIPT.md`, cue numbers and timecodes
-stripped, so it reads as a page on a phone. Then read it top to bottom before running
-anything. Every later step points at a line in this file.
+## 2. The fix
 
-## Step 2: Build the mishearing pairs
+"Fix my ____" names 1 thing in plain words: the opening, the part at minute 9, the number said twice. For each:
 
-Grep the transcript for every brand word, product name, person and tool that appears in the
-script. The ones that come back **missing** are the mangled ones, and the line where each
-should have been gives you what the transcriber heard instead.
+- the start time and the end time of the cues that hold those words, off the export. An SRT has no time per word, so never a time inside a cue
+- the first words and the last words, quoted, so the founder finds them in Descript's text
+- 1 line: what goes, and what stays
 
-Pairs, never spellings. "Claude Code" came back as "the cloud called", and no list of correct
-spellings finds that. Write them to a scratch `terms.tsv`, one line each:
+Nothing on the 3 lists sits in those cues: print their times and their first and last words, say "Nothing in these cues is on the 3 lists. Which words did you hear?", and wait. Nothing goes on the Delete list.
+
+Otherwise, print it and wait. On yes, add it to `## Delete list` in `06_REVIEW.md`, and say: "Delete those words in Descript's text, and retype every word on the Words spelled wrong list. Next one: Fix my ____. All done: export the SRT again and type: Here's the new export."
+
+## 3. The captions
+
+"Here's the new export." takes the newest SRT:
+
+1. Run gates.py on the new export with a `terms.tsv` rebuilt from the `## Word fixes` rows of `06_REVIEW.md` (what it should say, a TAB, what it says), then delete it. "Here's the new export." counts as the yes for every fix printed since the read: add each to `## Delete list`. A script line the first read found and this one cannot was eaten by a delete: say it first. A G6 wrong form still there: name it, say "Retype it in Descript's text, export again, then type: Here's the new export." and stop. A wrong form this run also prints under "Said with different words" may be what the founder said, so it goes under "Still in your video" and never stops the run. Every G1 line the read could not find that this export still cannot, and every G2 filler, G3 finding and G5 gap to delete from the read that is still in this export and not on the Delete list: print each under "Still in your video" with its words quoted and its time off the SRT (a G1 line has no time), then "Fix my ____, or leave it.", and go on.
+2. Run `python3 .claude/skills/cut/scripts/resegment.py <new export> <episode>/06_CAPTIONS.srt` and read the longest line and the cue count it prints (G8).
+3. Rewrite the whole gates table in `06_REVIEW.md` off this run, with the finished length.
+4. Say: "Export the finished video from Descript. That file is the one that goes up. Then type: Set this video up on YouTube."
+
+## 4. The listing
+
+Read:
+
+- The package: the MAIN title, character for character. Never re-titled.
+- `06_CAPTIONS.srt`: the chapter times. No captions file: say "Type: Here's the new export." and stop.
+- `03_SCRIPT.md`: the hook line (the spoken sentences under the `## 00:00` heading after the sentence that says the title, joined into 1 paragraph) and the `## MM:SS Name` headings.
+- The 1 link: the URL on the `Book:` line of `squad/sales.md`, without the full stop after it. No `squad/sales.md`: the `cta` row of `.claude/squad-roots.md`, else 1 question: "What is the 1 link this video sends people to?" Write the answer into the `cta` row, so it is asked once.
+
+Tag the link with `?utm_source=youtube&utm_content=epNN` (`&` in place of `?` when the link already carries a `?`), `epNN` the episode folder's name.
+
+Write `squad/week/<date>-listing.md`, `<date>` the package's date, in this shape:
 
 ```
-Claude Code<TAB>the cloud called,cloud code
+# Listing · <MAIN title>
+
+## TITLE
+<MAIN title>
+
+## DESCRIPTION
+<what the link gives, in 3 to 6 words>: <tagged link>
+
+<the hook line>
+
+<1 plain paragraph, in the words a buyer types into YouTube search>
+
+CHAPTERS
+0:00 <name>
+<m:ss> <name>
+
+## PINNED COMMENT
+<what the link gives>: <tagged link>
 ```
 
-Fixing a mishearing is typing in the Descript transcript and it costs nothing, so the pairs
-go to the founder as "what it says, what it should say" and their hand makes the change.
+- 1 link in the description, the tagged one, at the top. No second link, no link shortener.
+- Chapters off `06_CAPTIONS.srt` only. Find each script heading's first sentence in the captions the way gates.py reads words (case and punctuation off, a number and its word the same, so 3 matches "three"): its cue start is the chapter time, the heading's name is the chapter name. The first at 0:00, at least 3, each 10 seconds or longer, or YouTube ignores them all. A heading that runs under 10 seconds folds into the chapter before it.
+- No tags, no end screen, no em dashes. No number, claim or tool the video does not say.
 
-## Step 3: Run the gates
+Print the listing, then this list, and stop:
 
-```bash
-python3 .claude/skills/cut/scripts/gates.py <episode>/03_SCRIPT.md <cut>.srt terms.tsv
-```
+1. Upload the video file you exported from Descript.
+2. Add `06_CAPTIONS.srt` as the subtitles.
+3. Set the thumbnail from the package's main pair. It needs a verified account: youtube.com/verify.
+4. Paste the title and the description.
+5. Tap your link on your phone. It has to open.
+6. Set the hour. YouTube publishes the video then.
+7. Studio gives you the video's link once it is scheduled. Type "Here's the link." and paste it.
+8. Once the video is public, post the pinned comment and pin it. Then open it in Studio on a computer, press A/B Testing, and add all 3 pairs from the package, title and thumbnail together.
 
-It scores G1, G3, G4, G5 and G6 from `references/rubric.md` against the script and the cut,
-and prints the finished length. **Read its whole output.** It prints candidates, never
-decisions, and G1's list is the one you read every line of.
+A title-only package: skip the thumbnail in 3 and A/B Testing in 8, and say "Your thumbnails are not built yet. Upload with YouTube's own frame, and add the 3 pairs once they exist."
 
-Score the gates it does not compute, G7 and G8, by the rubric. Never stop at the first
-failure.
+## 5. The row
 
-**The scores go in `06_REVIEW.md`, never on the founder's screen.** What prints is step 4's
-delete list, and G1's own finding when a line died on one of the buttons. That one is
-unrecoverable, so it is said out loud the moment it is found.
+"Here's the link." with the URL:
 
-## Step 4: Turn "Fix my ____" into timestamps
-
-The founder says what is wrong in plain words, one thing at a time. The opening that rambles.
-The tangent at minute 9. The place the number got said twice. For each one, in file order:
-
-- the start and end timestamp off the SRT
-- the first few words and the last few words, quoted, so they can search the Descript
-  transcript for them
-- one line saying what goes and what stays
-
-That list is the fix. Deleting those sentences in Descript's transcript deletes them from the
-video, so the founder's hand finishes the run.
-
-**The caption file** comes off the SRT exported after the deletes, because that is the one
-that matches the video going up:
-
-```bash
-python3 .claude/skills/cut/scripts/resegment.py descript-cut.srt <episode>/06_CAPTIONS.srt
-```
-
-It prints the longest line and the cue count. Read those. Descript breaks its own captions
-where it likes and a paragraph lands on screen as a 3-line block, which is the failure
-reported every time.
-
-**The caption look is locked:** Inter Regular at 30, white on a black box at 70 percent,
-bottom centre (Chris, 2026-09-11). Regular, never bold. The founder sets that in Descript's
-caption panel; this SRT is the copy YouTube takes.
-
-## Step 5: Hand it over
-
-Say it in 3 lines, not a paragraph:
-
-- Read `06_TRANSCRIPT.md` top to bottom. Does it say what you said.
-- Read `06_REVIEW.md`. Every gate, and the lines to delete with their timestamps.
-- Listen to the first 15 seconds. Fluency by ear is the one call a page cannot make.
-
-Then stop. A missing line is the only thing that cannot be fixed later, so name that first
-when you found one. Rough grammar and a jump cut are not reasons to send a cut back.
-
-## Never re-time audio
-
-A recording exported already sped up (Screen Studio does 1.2x with the pitch preserved) is
-correct as it came. Re-encoding it to change the rate breaks the voice. The rate changes at
-the recorder, or not at all.
+1. The video id: the 11 characters after `v=` or after `youtu.be/`.
+2. Append 1 row to `squad/content-log.md`: `date | title | link | video id`, with today's date, the MAIN title, the URL and the id. No file yet: create it with that header row first. The id already in the file: no second row.
+3. Print the row, and: "When A/B Testing names a winner, tell the Winning Scrape which pair won: Pair 2 won." A title-only package: in place of that line, print "Your thumbnails come first. Drop 2 to 4 photos of your face in squad/face/, then say: Run the Winning Scrape." Done.

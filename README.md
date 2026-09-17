@@ -1,43 +1,24 @@
-# Cut: install in 60 seconds
+# Cut
 
-This agent is a base. Once you have done it your way, tell your squad "update the agent to
-do it like this."
+This agent is a base. Once you have done it your way, tell your squad "update the agent to do it like this."
 
-Record one take and fumble as much as you like. Descript's three buttons drop the retakes,
-the filler and the gaps. This reads what came out, tells you what is still wrong and exactly
-where, and hands you a page to read instead of a timeline to scrub.
+It takes your video from Descript to YouTube. It reads your Descript edit against your script and tells you what is still wrong, with the times and the words quoted. It turns your export into a caption file, short lines, never 2 sentences on 1 line. It writes the listing you paste into YouTube Studio, with 1 link, and logs the video in `squad/content-log.md`.
 
-## What it runs on
+**Install.** Installed with the one line on aichrislee.com/free (products/squad/install-line.md), then quit and reopen Claude Code.
 
-Printed here so you find out now and not at midnight:
+**What it runs on.**
 
-- A Descript account, and a take you already ran through the three buttons: Remove filler
-  words, then Remove retakes, then Shorten word gaps.
-- That cut exported out of Descript as an SRT. It carries the timestamps.
-- This week's script, next to it.
-- `python3`. Both scripts in here are standard library, so there is nothing to install.
+- A paid Descript plan. The free plan puts a watermark on the export. The AI tools use Descript's AI credits.
+- Your script, `03_SCRIPT.md`, and your package in `squad/week/`.
+- `python3`. The 2 scripts in here need nothing installed.
 
-Descript is the cut. Its free plan stamps a watermark on your export, so this runs on a paid
-plan.
+**Run it.**
 
-## Run it
+1. Record 1 take. A slip: stop, 1 second of silence, then the whole sentence again.
+2. In Descript: drag the take in, open the AI Tools panel, press Remove filler words, Remove retakes and Shorten word gaps. Export, Subtitles, SRT, into your episode folder.
+3. Type "Cut my raw take." Then "Fix my ____" for anything still wrong, and delete the words it names in Descript's text.
+4. Export the SRT again and type "Here's the new export." Then export the video.
+5. Type "Set this video up on YouTube." Upload by hand in Studio, off the list it gives you.
+6. Type "Here's the link." with the video's link. Once the video is public, post the pinned comment and pin it, then press A/B Testing in Studio and add your 3 pairs.
 
-Drop this whole folder into `.claude/skills/` as `cut`, quit and reopen Claude Code, then
-say what is wrong in plain words, one thing at a time: **"Fix my opening."**
-
-## What you get
-
-3 files in your episode folder:
-
-- `06_TRANSCRIPT.md`, the cut as a page you can read on your phone.
-- `06_REVIEW.md`, every gate passed or failed, the finished length, and the lines to delete
-  with their timestamps and the words quoted.
-- `06_CAPTIONS.srt`, one sentence per cue, ready to upload as the real subtitle track.
-
-Read the 2 pages, listen to the first 15 seconds, then delete the named lines in Descript
-and export the video. That file is the one you upload.
-
-## What it will not do
-
-Touch your Descript project. Re-time your audio. Edit your script. Upload, schedule or
-publish anything.
+It never opens Descript, never deletes a word, and never touches your YouTube account.
