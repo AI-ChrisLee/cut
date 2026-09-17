@@ -10,7 +10,7 @@ Everything here is checked against 2 files already on their laptop: the SRT they
 week's script. Nobody scrubs a timeline.
 
 ```bash
-python3 .claude/skills/cut/scripts/gates.py <script.md> <export.srt> [terms.tsv]
+python3 .claude/skills/execution-content-cut/scripts/gates.py <script.md> <export.srt> [terms.tsv]
 ```
 
 That computes G1, G2, G3, G4, G5 and G6 and prints the length, under those names. It prints candidates,

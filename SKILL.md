@@ -1,9 +1,9 @@
 ---
-name: cut
-description: Use this when a recording has been edited in Descript and needs its review, its captions and its YouTube listing. The founder says "Cut my raw take.", "Fix my ____" (like "Fix my opening."), "Here's the new export.", "Set this video up on YouTube.", "Here's the link." or "/cut". It reads the SRT exported out of Descript against the script, names what to delete with the times and the words quoted, writes the caption file, writes the listing the founder pastes into YouTube Studio, and logs 1 row in squad/content-log.md. It never opens Descript, never deletes a word and never touches YouTube.
+name: execution-content-cut
+description: Use this when a recording has been edited in Descript and needs its review, its captions and its YouTube listing. The founder says "Cut my raw take.", "Fix my ____" (like "Fix my opening."), "Here's the new export.", "Set this video up on YouTube.", "Here's the link." or "/execution-content-cut". It reads the SRT exported out of Descript against the script, names what to delete with the times and the words quoted, writes the caption file, writes the listing the founder pastes into YouTube Studio, and logs 1 row in squad/content-log.md. It never opens Descript, never deletes a word and never touches YouTube.
 ---
 
-# Cut
+# execution-content-cut
 
 4 outputs, in this order: `<episode>/06_REVIEW.md` (the gates and the delete list), `<episode>/06_CAPTIONS.srt`, `squad/week/<date>-listing.md`, and 1 row in `squad/content-log.md`.
 
@@ -34,14 +34,14 @@ No SRT in the episode folder: print these 3 steps, and stop.
 ## The episode
 
 - The episode folder is the `episode:` line of the newest `squad/week/<date>-package.md`, unless the founder names another. No package: say "Run the Winning Scrape first. The title comes from your package." and stop.
-- The script is `03_SCRIPT.md` in that folder. Missing: say "Run /the-money-driven-script first. The edit is read against your script." and stop.
+- The script is `03_SCRIPT.md` in that folder. Missing: say "Run /execution-content-script first. The edit is read against your script." and stop.
 - The export is the newest `.srt` in that folder that is not `06_CAPTIONS.srt`.
 
 ## The triggers
 
 | The founder says | This run |
 |---|---|
-| "Cut my raw take.", `/cut` | 1. The read |
+| "Cut my raw take.", `/execution-content-cut` | 1. The read |
 | "Fix my ____" | 2. The fix |
 | "Here's the new export." | 3. The captions |
 | "Set this video up on YouTube." | 4. The listing |
@@ -53,7 +53,7 @@ Resuming reads the files, never a session's memory. No SRT: the 3 Descript steps
 
 1. Read the export top to bottom.
 2. Build the brand pairs. gates.py finds a word heard wrong inside a line it can match. A brand word heard as noise (Apify as F5) shows under G6 as said with different words. Search the export for every brand word, product, person and tool the script names, and pair each one missing. Write the pairs to a scratch `terms.tsv`, 1 line each, `Claude Code<TAB>the cloud called,cloud code`.
-3. Run `python3 .claude/skills/cut/scripts/gates.py <episode>/03_SCRIPT.md <export> terms.tsv` and read its whole output. Score G7 and G8 by `references/rubric.md`. Score every gate, never stop at the first failure. Delete `terms.tsv`.
+3. Run `python3 .claude/skills/execution-content-cut/scripts/gates.py <episode>/03_SCRIPT.md <export> terms.tsv` and read its whole output. Score G7 and G8 by `references/rubric.md`. Score every gate, never stop at the first failure. Delete `terms.tsv`.
 4. Write `06_REVIEW.md`: every gate passed or failed, the finished length, `## Word fixes` (what it says, what it should say) and `## Delete list` (empty until step 2).
 5. Print 3 short lists, in this order, and nothing more:
    - Script lines it cannot find in the edit (G1). A line the founder said and cannot find there was eaten by a button. This list comes first, always.
@@ -79,7 +79,7 @@ Otherwise, print it and wait. On yes, add it to `## Delete list` in `06_REVIEW.m
 "Here's the new export." takes the newest SRT:
 
 1. Run gates.py on the new export with a `terms.tsv` rebuilt from the `## Word fixes` rows of `06_REVIEW.md` (what it should say, a TAB, what it says), then delete it. "Here's the new export." counts as the yes for every fix printed since the read: add each to `## Delete list`. A script line the first read found and this one cannot was eaten by a delete: say it first. A G6 wrong form still there: name it, say "Retype it in Descript's text, export again, then type: Here's the new export." and stop. A wrong form this run also prints under "Said with different words" may be what the founder said, so it goes under "Still in your video" and never stops the run. Every G1 line the read could not find that this export still cannot, and every G2 filler, G3 finding and G5 gap to delete from the read that is still in this export and not on the Delete list: print each under "Still in your video" with its words quoted and its time off the SRT (a G1 line has no time), then "Fix my ____, or leave it.", and go on.
-2. Run `python3 .claude/skills/cut/scripts/resegment.py <new export> <episode>/06_CAPTIONS.srt` and read the longest line and the cue count it prints (G8).
+2. Run `python3 .claude/skills/execution-content-cut/scripts/resegment.py <new export> <episode>/06_CAPTIONS.srt` and read the longest line and the cue count it prints (G8).
 3. Rewrite the whole gates table in `06_REVIEW.md` off this run, with the finished length.
 4. Say: "Export the finished video from Descript. That file is the one that goes up. Then type: Set this video up on YouTube."
 
@@ -140,4 +140,4 @@ A title-only package: skip the thumbnail in 3 and A/B Testing in 8, and say "You
 
 1. The video id: the 11 characters after `v=` or after `youtu.be/`.
 2. Append 1 row to `squad/content-log.md`: `date | title | link | video id`, with today's date, the MAIN title, the URL and the id. No file yet: create it with that header row first. The id already in the file: no second row.
-3. Print the row, and: "When A/B Testing names a winner, tell the Winning Scrape which pair won: Pair 2 won." A title-only package: in place of that line, print "Your thumbnails come first. Drop 2 to 4 photos of your face in squad/face/, then say: Run the Winning Scrape." Done.
+3. Print the row, and: "When A/B Testing names a winner, tell execution-content-scrape which pair won: Pair 2 won." A title-only package: in place of that line, print "Your thumbnails come first. Drop 2 to 4 photos of your face in squad/face/, then say: Run the Winning Scrape." Done.
